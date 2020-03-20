@@ -1,0 +1,59 @@
+version: "3.5"
+
+services:
+  python:
+    image: "python:${PYTHON_TAG}"
+    container_name: "${PROJECT_NAME}_python"
+    hostname: python
+    stop_grace_period: 60s
+    # build: 
+    #   dockerfile: Dockerfile
+    #   context: ./python
+    #   args:
+    #     PYTHON_TAG: $PYTHON_TAG
+    volumes:
+      - ./python:/scripts
+
+  influxdb:
+    image: "influxdb:${INFLUXDB_TAG}"
+    container_name: "${PROJECT_NAME}_influxdb"
+    hostname: influxdb
+    restart: always
+    stop_grace_period: 60s
+    ports:
+      - "${INFLUXDB_API_PORT}:8086"
+    environment:
+      INFLUXDB_DATA_ENGINE: $INFLUXDB_DATA_ENGINE
+      INFLUXDB_REPORTING_DISABLED: $INFLUXDB_REPORTING_DISABLED
+      INFLUXDB_DATA_QUERY_LOG_ENABLED: $INFLUXDB_DATA_QUERY_LOG_ENABLED
+    volumes:
+      - ./data/influxdb:/var/lib/influxdb
+
+  telegraf:
+    image: "telegraf:${TELEGRAF_TAG}"
+    container_name: "${PROJECT_NAME}_telegraf"
+    hostname: telegraf
+    restart: always
+    stop_grace_period: 60s
+    depends_on:
+      - influxdb
+
+  grafana:
+    image: "grafana/grafana:${GRAFANA_TAG}"
+    container_name: "${PROJECT_NAME}_grafana"
+    hostname: grafana
+    restart: always
+    stop_grace_period: 60s
+    user: "0"
+    ports:
+      - "${GRAFANA_PORT}:3000"
+    environment:
+      GF_INSTALL_PLUGINS: $GF_INSTALL_PLUGINS
+    depends_on:
+      - influxdb
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+     
+networks:
+  default:
+      name: time_series_anomaly_detection
