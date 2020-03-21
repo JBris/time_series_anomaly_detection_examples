@@ -10,6 +10,7 @@ ENV PYTHON_PACKAGES="\
     pandas \
     nltk \
     redis \
+    hiredis \
 " 
 
 RUN pip install --upgrade pip && pip install --no-cache-dir $PYTHON_PACKAGES

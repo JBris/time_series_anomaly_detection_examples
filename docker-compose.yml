@@ -11,6 +11,13 @@ services:
       context: ./python
       args:
         PYTHON_TAG: $PYTHON_TAG
+    environment:
+      PYTHON_REDIS_HOST: $PYTHON_REDIS_HOST
+      PYTHON_REDIS_PORT: $PYTHON_REDIS_PORT
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
       - ./python:/scripts
 

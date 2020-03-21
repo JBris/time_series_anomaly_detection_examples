@@ -31,7 +31,7 @@ vol:
 	docker volume ls
 
 log:
-	docker logs $(PROJECT_NAME)_python
+	docker-compose logs python
 	
 #See docker-compose rm
 #make rm a="--help"
