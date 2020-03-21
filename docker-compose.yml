@@ -6,6 +6,10 @@ services:
     container_name: "${PROJECT_NAME}_python"
     hostname: python
     stop_grace_period: 60s
+    # mem_limit: $PYTHON_MEMORY_LIMIT
+    # memswap_limit: -1
+    # oom_score_adj: -500
+    # oom_kill_disable: true
     build: 
       dockerfile: Dockerfile
       context: ./python
@@ -72,4 +76,4 @@ services:
 
 networks:
   default:
-      name: time_series_anomaly_detection
+      driver: bridge
