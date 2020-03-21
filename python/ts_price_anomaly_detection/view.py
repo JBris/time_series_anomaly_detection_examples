@@ -1,31 +1,39 @@
 #!/usr/bin/env python
 
+import json
 import os
 import pandas as pd
+import pickle
 from cache import get, set
 
 dirname = os.path.dirname(os.path.realpath(__file__))
-expedia = get('expedia_df')
-if expedia is None:
+expedia_str = get('expedia_df')
+if expedia_str is None:
     filename = dirname + '/data/train.csv'
     df_chunk = pd.read_csv(
                             filename, 
                             chunksize=10**6, 
-                            usecols=['srch_booking_window', 'srch_saturday_night_bool', 'price_usd', 'date_time'], 
-                            dtype={"srch_booking_window": "int32", "srch_saturday_night_bool": "bool", "price_usd":"float32", "date_time": "object"}
+                            usecols=['prop_id', 'srch_room_count', 'visitor_location_country_id', 'srch_booking_window', 'srch_saturday_night_bool', 'price_usd', 'date_time'], 
+                            dtype={
+                                "prop_id": "int32",
+                                "srch_room_count": "int16",
+                                "visitor_location_country_id": "int16",
+                                "srch_booking_window": "int16", 
+                                "srch_saturday_night_bool": "bool", 
+                                "price_usd":"float16", 
+                                "date_time": "object"
+                            }
                         )
     chunks = []
     for chunk in df_chunk: 
         chunks.append(chunk)
     expedia = pd.concat(chunks)
-    set('expedia_df', expedia.to_pickle())
+    set('expedia_df', pickle.dumps(expedia))
 else:
-    expedia = expedia.read_pickle()
+    expedia = pickle.loads(expedia_str)
 
-# df = expedia.loc[expedia['prop_id'] == 104517]
-# df = df.loc[df['srch_room_count'] == 1]
-# df = df.loc[df['visitor_location_country_id'] == 219]
-# df = df[['date_time', 'price_usd', 'srch_booking_window', 'srch_saturday_night_bool']]
-# df.info()
-# print(df.info())
+df = expedia.loc[expedia['prop_id'] == 104517]
+df = df.loc[df['srch_room_count'] == 1]
+df = df.loc[df['visitor_location_country_id'] == 219]
+df.info()
 

@@ -18,6 +18,15 @@ def get(k):
     except:
         return None
 
+def delete(k):
+    try:
+        r = getClient()
+        res = r.delete(k)
+        r.close()
+        return res
+    except:
+        return False
+
 def getClient():
     redis_host = os.getenv('PYTHON_REDIS_HOST')
     if redis_host is None: redis_host = 'localhost'
