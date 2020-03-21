@@ -40,8 +40,8 @@ rm:
 
 #Container commands
 penter:
-	docker-compose exec python sh
+	docker-compose run python 
 
-#make jrun c="echo hello world"
+#make prun d=ts_price_anomaly_detection s=view
 prun:
-	docker-compose run python $(c)
+	docker-compose run python python /scripts/$(d)/$(s).py

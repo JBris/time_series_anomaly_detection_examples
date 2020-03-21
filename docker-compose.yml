@@ -6,11 +6,11 @@ services:
     container_name: "${PROJECT_NAME}_python"
     hostname: python
     stop_grace_period: 60s
-    # build: 
-    #   dockerfile: Dockerfile
-    #   context: ./python
-    #   args:
-    #     PYTHON_TAG: $PYTHON_TAG
+    build: 
+      dockerfile: Dockerfile
+      context: ./python
+      args:
+        PYTHON_TAG: $PYTHON_TAG
     volumes:
       - ./python:/scripts
 
@@ -54,6 +54,15 @@ services:
     volumes:
       - ./data/grafana:/var/lib/grafana
      
+  redis:
+    image: "redis:${REDIS_TAG}"
+    container_name: "${PROJECT_NAME}_redis"
+    hostname: redis
+    stop_grace_period: 60s
+    restart: always
+    ports:
+      - ${REDIS_PORT}:6379
+
 networks:
   default:
       name: time_series_anomaly_detection
