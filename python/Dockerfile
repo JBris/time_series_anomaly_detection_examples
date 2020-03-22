@@ -11,6 +11,7 @@ ENV PYTHON_PACKAGES="\
     nltk \
     redis \
     hiredis \
+    influxdb \
 " 
 
 RUN pip install --upgrade pip && pip install --no-cache-dir $PYTHON_PACKAGES

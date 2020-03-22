@@ -48,6 +48,12 @@ services:
     stop_grace_period: 60s
     depends_on:
       - influxdb
+    environment:
+      - HOST_PROC=/host/proc
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/host/proc:ro 
+      - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   grafana:
     image: "grafana/grafana:${GRAFANA_TAG}"
