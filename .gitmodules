@@ -1,0 +1,3 @@
+[submodule "python/csv-to-influxdb"]
+	path = python/csv-to-influxdb
+	url = https://github.com/fabio-miranda/csv-to-influxdb
