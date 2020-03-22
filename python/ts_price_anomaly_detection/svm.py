@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from dataset import load_data, filter_dataset, reindex_data
-from sklearn.ensemble import IsolationForest
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import OneClassSVM
