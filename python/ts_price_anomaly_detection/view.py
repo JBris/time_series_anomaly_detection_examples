@@ -1,39 +1,24 @@
 #!/usr/bin/env python
 
-import json
-import os
-import pandas as pd
-import pickle
-from cache import get, set
+import matplotlib.pyplot as plt
+from dataset import load_data, filter_dataset
 
-dirname = os.path.dirname(os.path.realpath(__file__))
-expedia_str = get('expedia_df')
-if expedia_str is None:
-    filename = dirname + '/data/train.csv'
-    df_chunk = pd.read_csv(
-                            filename, 
-                            chunksize=10**6, 
-                            usecols=['prop_id', 'srch_room_count', 'visitor_location_country_id', 'srch_booking_window', 'srch_saturday_night_bool', 'price_usd', 'date_time'], 
-                            dtype={
-                                "prop_id": "int32",
-                                "srch_room_count": "int16",
-                                "visitor_location_country_id": "int16",
-                                "srch_booking_window": "int16", 
-                                "srch_saturday_night_bool": "bool", 
-                                "price_usd":"float16", 
-                                "date_time": "object"
-                            }
-                        )
-    chunks = []
-    for chunk in df_chunk: 
-        chunks.append(chunk)
-    expedia = pd.concat(chunks)
-    set('expedia_df', pickle.dumps(expedia))
-else:
-    expedia = pickle.loads(expedia_str)
+def view(df):
+    df.plot(x='date_time', y='price_usd', figsize=(12,6))
+    plt.xlabel('Date time')
+    plt.ylabel('Price in USD')
+    plt.title('Time Series of room price by date time of search');
 
-df = expedia.loc[expedia['prop_id'] == 104517]
-df = df.loc[df['srch_room_count'] == 1]
-df = df.loc[df['visitor_location_country_id'] == 219]
-df.info()
+    a = df.loc[df['srch_saturday_night_bool'] == 0, 'price_usd']
+    b = df.loc[df['srch_saturday_night_bool'] == 1, 'price_usd']
+    plt.figure(figsize=(10, 6))
+    plt.hist(a, bins = 50, alpha=0.5, label='Search Non-Sat Night')
+    plt.hist(b, bins = 50, alpha=0.5, label='Search Sat Night')
+    plt.legend(loc='upper right')
+    plt.xlabel('Price')
+    plt.ylabel('Count')
+    plt.show();
 
+expedia = load_data()
+df = filter_dataset(expedia)
+view(df)
