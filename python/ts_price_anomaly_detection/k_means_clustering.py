@@ -3,10 +3,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from dataset import load_data, filter_dataset
+from dataset import load_data, filter_dataset, reindex_data
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 def elbow_method(df):
@@ -70,22 +69,11 @@ def getDistanceByPoint(data, model):
     return distance
 
 def view_anomalies(df):
-    data = df[['price_usd', 'srch_booking_window', 'srch_saturday_night_bool']]
-    X = data.values
-    X_std = StandardScaler().fit_transform(X)
-    data = pd.DataFrame(X_std)
-    # reduce to 2 important features
-    pca = PCA(n_components=2)
-    data = pca.fit_transform(data)
-    # standardize these 2 new features
-    scaler = StandardScaler()
-    np_scaled = scaler.fit_transform(data)
-    data = pd.DataFrame(np_scaled)
-
+    data = reindex_data(df)
+    df.index = data.index
     n_cluster = range(1, 20)
     kmeans = [KMeans(n_clusters=i).fit(data) for i in n_cluster]
     df['cluster'] = kmeans[9].predict(data)
-    df.index = data.index
     df['principal_feature1'] = data[0]
     df['principal_feature2'] = data[1]
     df['cluster'].value_counts()
