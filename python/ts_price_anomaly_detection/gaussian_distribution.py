@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from dataset import load_data, filter_dataset, reindex_data
