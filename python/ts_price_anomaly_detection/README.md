@@ -1,4 +1,4 @@
-## Importing to Grafana
+## Importing to InfluxDB
 
 ```
 csv-to-influxdb.py -i $(pwd)/data/train.csv -s ${INFLUXDB_HOST}:8086 -tc date_time \ 
