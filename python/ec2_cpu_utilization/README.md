@@ -1,3 +1,7 @@
+## Usage
+
+Place data set in the local data directory. View the references.md file for more information.
+
 ## Importing to InfluxDB
 
 ```
