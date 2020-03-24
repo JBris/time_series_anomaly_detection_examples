@@ -16,6 +16,8 @@ InfluxDB and Grafana are optionally included in the Docker stack for data storag
 
 Redis is optionally included in the Docker stack for caching (i.e. memoization) purposes.
 
+If you're using Docker, execute [build.sh](build.sh) to get started.
+
 ### Python
 
 Examples are typically written in python. From the [.env.example file](.env.example), you can see that scripts are written in python 3.8.2. A list of module dependencies can be found in the [Dockerfile](python/Dockerfile). You aren't particularly forced to use Docker, and can use something like Conda instead if that's your preference.
