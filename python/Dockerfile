@@ -10,6 +10,7 @@ ENV PYTHON_PACKAGES="\
     pandas \
     nltk \
     seaborn \
+    keras \
     redis \
     hiredis \
     influxdb \

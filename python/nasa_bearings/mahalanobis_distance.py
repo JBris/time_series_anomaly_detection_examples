@@ -92,6 +92,9 @@ def validate_data(dist_test, dist_train, threshold, X_train_PCA):
     anomaly['Anomaly'] = anomaly['Mob dist'] > anomaly['Thresh']
     anomaly.index = X_test_PCA.index
     print(anomaly.head())
+    anomaly_alldata = pd.concat([anomaly_train, anomaly])
+    anomaly_alldata.plot(logy=True, figsize = (10,6), ylim = [1e-1,1e3], color = ['green','red'])
+    plt.show()
 
 df = load_data()
 dataset_train, dataset_test = filter_dataset(df)
