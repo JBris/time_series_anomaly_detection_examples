@@ -45,3 +45,10 @@ penter:
 #make prun d=ts_price_anomaly_detection s=view
 prun:
 	docker-compose run python python /scripts/$(d)/$(s).py
+
+tenter:
+	docker-compose run tensorflow 
+
+#make trun d=ts_price_anomaly_detection s=view
+trun:
+	docker-compose run tensorflow python /scripts/$(d)/$(s).py
