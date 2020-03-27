@@ -24,4 +24,5 @@ scikit-learn==0.22.2.post1
 scipy==1.4.1
 seaborn==0.10.0
 six==1.14.0
+tqdm==4.43.0
 urllib3==1.25.8
