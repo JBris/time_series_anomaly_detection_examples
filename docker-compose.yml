@@ -20,27 +20,7 @@ services:
         hard: -1
     volumes:
       - ./python:/scripts
-
-  tensorflow:
-    image: "tensorflow/tensorflow:${TENSORFLOW_TAG}"
-    container_name: "${PROJECT_NAME}_tensorflow"
-    hostname: tensorflow
-    stop_grace_period: 60s
-    build: 
-      dockerfile: Dockerfile
-      context: ./python
-      args:
-        BASE_IMAGE: tensorflow/tensorflow:${TENSORFLOW_TAG}
-    environment:
-      PYTHON_REDIS_HOST: $PYTHON_REDIS_HOST
-      PYTHON_REDIS_PORT: $PYTHON_REDIS_PORT
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - ./python:/scripts
-
+      
   influxdb:
     image: "influxdb:${INFLUXDB_TAG}"
     container_name: "${PROJECT_NAME}_influxdb"

@@ -15,6 +15,7 @@ ENV PYTHON_PACKAGES="\
     hiredis \
     influxdb \
     tqdm \
+    tensorflow \
 " 
 
 RUN pip install --upgrade pip && pip install --no-cache-dir $PYTHON_PACKAGES
