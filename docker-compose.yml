@@ -21,6 +21,31 @@ services:
     volumes:
       - ./python:/scripts
       
+  tidyverse:
+    image: "rocker/tidyverse:${TIDYVERSE_TAG}"
+    container_name: "${PROJECT_NAME}_tidyverse"
+    hostname: tidyverse
+    stop_grace_period: 60s
+    restart: always
+    build: 
+      dockerfile: Dockerfile
+      context: ./r
+      args:
+        TIDYVERSE_TAG: $TIDYVERSE_TAG
+    environment:
+      USER: $R_STUDIO_USER
+      PASSWORD: $R_STUDIO_PASSWORD
+      ROOT: "TRUE"
+      #DISABLE_AUTH: true
+    ports:
+      - ${R_STUDIO_PORT}:8787 
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./r:/home
+      
   influxdb:
     image: "influxdb:${INFLUXDB_TAG}"
     container_name: "${PROJECT_NAME}_influxdb"

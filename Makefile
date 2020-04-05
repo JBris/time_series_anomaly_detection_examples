@@ -45,3 +45,9 @@ penter:
 #make prun d=ts_price_anomaly_detection s=view
 prun:
 	docker-compose run python python /scripts/$(d)/$(s).py
+
+renter:
+	docker-compose exec tidyverse sh
+
+rrun:
+	docker-compose run tidyverse r /home/$(R_STUDIO_USER)/$(s).r
