@@ -1,3 +1,7 @@
+# Source: https://towardsdatascience.com/tidy-anomaly-detection-using-r-82a0c776d523
+# Author: AbdulMajedRaja RS - https://towardsdatascience.com/@amrwrites
+# See https://github.com/amrrs/anomaly_detection_tidy_way/
+
 library(anomalize) #tidy anomaly detectiom
 library(tidyverse) #tidyverse packages like dplyr, ggplot, tidyr
 library(coindeskr) #bitcoin price extraction from coindesk
