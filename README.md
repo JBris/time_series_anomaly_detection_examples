@@ -4,13 +4,14 @@
 
 * [Introduction](#introduction)<a name="introduction"/>
 * [Python](#python)<a name="python"/>
+* [R](#r)<a name="r"/>
 * [InfluxDB](#influxdb)<a name="influxdb"/>
 
 ### Introduction
 
 The Time Series Anomaly Detection repo contains several examples of anomaly detection algorithms for use with time series data sets.
 
-Examples can be found in the [python](python) directory.
+Examples can be found in the [python directory](python) and [r directory](r).
 
 InfluxDB and Grafana are optionally included in the Docker stack for data storage and visualization purposes. Telegraf has been included to fill the InfluxDB with dummy metric data.
 
@@ -27,6 +28,16 @@ If you opt to use Docker, you can view the [Makefile](Makefile) for relevant Doc
 Example anomaly detection algorithms can be found in the [python](python) directory, and each example directory contains a similar structure. When exploring an example, you should first read the README.md and references.md files. The references.md file will provide you with a relevant link to a tutorial page and data set. Download the recommended data set and place it in the local data directory (don't place it in the [root data directory](data)).
 
 You can then execute various python scripts to analyze and model the data. It's recommended that you run explore.py then view.py first to better understand the distribution of the data.
+
+### R
+
+Additional examples are written in R. From the [.env.example file](.env.example), you can see that R scripts are written in version 3.6.3. A list of additional R packages can be found in the [Dockerfile](r/Dockerfile). 
+
+As the [docker-compose.yml](docker-compose.yml) file shows, this repo employs the [rocker/tidyverse image](https://hub.docker.com/r/rocker/tidyverse) which already includes the tidyverse collection and RStudio server.
+
+If you opt to use Docker, you can view the [Makefile](Makefile) for relevant Docker commands. The `make renter` command will allow users to execute shell commands within the R container. The `make prun` command will run an R script. For example, `make rrun s=bitcoin_anomalies` will run [$R_STUDIO_USER/view.r](r/user/bitcoin_anomalies.r)
+
+Example anomaly detection algorithms can be found in the [r](r) directory. You can then execute various r scripts to analyze and model the data. 
 
 ### InfluxDB
 

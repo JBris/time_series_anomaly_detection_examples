@@ -1,2 +1,4 @@
 **/data
-kitematic
+**/kitematic
+**/.rstudio
+**/.cache
