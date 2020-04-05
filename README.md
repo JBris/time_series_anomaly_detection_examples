@@ -35,9 +35,9 @@ Additional examples are written in R. From the [.env.example file](.env.example)
 
 As the [docker-compose.yml](docker-compose.yml) file shows, this repo employs the [rocker/tidyverse image](https://hub.docker.com/r/rocker/tidyverse) which already includes the tidyverse collection and RStudio server.
 
-If you opt to use Docker, you can view the [Makefile](Makefile) for relevant Docker commands. The `make renter` command will allow users to execute shell commands within the R container. The `make prun` command will run an R script. For example, `make rrun s=bitcoin_anomalies` will run [$R_STUDIO_USER/view.r](r/user/bitcoin_anomalies.r)
+If you opt to use Docker, you can view the [Makefile](Makefile) for relevant Docker commands. The `make renter` command will allow users to execute shell commands within the R container. The `make rrun` command will run an R script. For example, `make rrun s=bitcoin_anomalies` will run [$R_STUDIO_USER/view.r](r/user/bitcoin_anomalies.r)
 
-Example anomaly detection algorithms can be found in the [r](r) directory. You can then execute various r scripts to analyze and model the data. 
+Example anomaly detection algorithms can be found in the [r directory](r). You can then execute various r scripts to analyze and model the data. 
 
 ### InfluxDB
 
