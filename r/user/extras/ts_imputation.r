@@ -78,3 +78,4 @@ ma4 <- mean((na_seadec(tsAirgap, algorithm = "interpolation") - AirPassengers)^2
 
 data.frame(methods=c("Seas-Adj+Random", "Seas-Adj+Mean", "Seas-Adj+LOCF","Seas-Adj+Linear"),
            MSE=c(ma1, ma2, ma3, ma4))
+           
